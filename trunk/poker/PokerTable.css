@@ -1,0 +1,141 @@
+/* 
+    Document   : PokerTable
+    Created on : Feb 27, 2011, 7:57:56 PM
+    Author     : madis
+    Description:
+        Sylesheed for poker table.
+*/
+
+html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, pre, code, address, variable, form, fieldset, blockquote {
+ padding: 0;
+ margin: 0;
+ font-size: 100%;
+ font-weight: normal;
+}
+
+html {
+	background: white;
+}
+body {
+	background: red;
+	height: 600px;
+	width: 800px;
+}
+
+.pokerTable {
+	height: 500px;
+	width: 800px;
+	
+/*	background-image: url("images/ft_green_poker_skin.png");	*/
+	background-color: green;
+	color: black;
+}
+.players {
+	background-color: gray;
+	color: black;
+	width: 120px;
+	height: 60px;
+}
+
+.players #p1 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 60px;
+	left: 500px;
+}
+
+.players #p2 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 160px;
+	left: 600px;
+}
+
+.players #p3 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 280px;
+	left: 600px;
+}
+
+.players #p4 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 380px;
+	left: 500px;
+}
+
+.players #p5 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 380px;
+	left: 300px;
+}
+
+.players #p6 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 375px;
+	left: 130px;
+}
+
+.players #p7 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 273px;
+	left: 64px;
+}
+
+.players #p8 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 150px;
+	left: 42px;
+}
+
+.players #p9 {
+	background: inherit;
+	height: inherit;
+	width: inherit;
+	position:absolute;
+	top: 55px;
+	left: 170px;
+}
+
+.pokerTable #playerActions {
+	position: absolute;
+	background: blue;
+	bottom: 55px;
+	right: 10px;
+	height: 100px;
+	width: 250px;
+}
+
+.pokerTable #chat {
+	position: absolute;
+	left: 10px;
+	bottom: 45px;
+	height: 100px;
+	width: 200px;
+}
+
+.playerAction {
+	width: 30%;
+	
+}
