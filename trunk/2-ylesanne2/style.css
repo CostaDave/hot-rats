@@ -17,14 +17,15 @@ h1 {
 	background-image: url('http://media.smashingmagazine.com/cdn_smash/images/header-contest/full/avto.jpg');
 	padding-top: 50px;
 	padding-left: 20px;
-	min-height: 80px;			
+	min-height: 80px;				
 }
 
 h2 {
 	font-size: 20px;
 	font-weight: bold;
 	color: #666600;
-	border-bottom-style: #999900;	
+	border-bottom-style: double;
+	border-bottom-color: #999900;	
 }
 
 .menu {
@@ -40,10 +41,10 @@ h2 {
 }
 
 .content {
+	border-style: solid;
 	border-color: #999900;
 	border-width: 1px;
 	padding: 10px;
-	
 }
 
 .left {
