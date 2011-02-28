@@ -18,124 +18,142 @@ html {
 }
 body {
 	background: red;
+	margin:auto;
 	height: 600px;
 	width: 800px;
 }
 
 .pokerTable {
+	position: relative;
 	height: 500px;
 	width: 800px;
 	
-/*	background-image: url("images/ft_green_poker_skin.png");	*/
+	background-image: url("images/ft_green_poker_skin.png");	
 	background-color: green;
 	color: black;
 }
+
 .players {
 	background-color: gray;
-	color: black;
+	position:absolute;
+	color: white;
 	width: 120px;
 	height: 60px;
 }
 
-.players #p1 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p1 {
 	top: 60px;
 	left: 500px;
 }
 
-.players #p2 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p2 {
 	top: 160px;
 	left: 600px;
 }
 
-.players #p3 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p3 {
 	top: 280px;
 	left: 600px;
 }
 
-.players #p4 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
+#p4 {
 	position:absolute;
 	top: 380px;
 	left: 500px;
 }
 
-.players #p5 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p5 {
 	top: 380px;
 	left: 300px;
 }
 
-.players #p6 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p6 {
 	top: 375px;
 	left: 130px;
 }
 
-.players #p7 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p7 {
 	top: 273px;
-	left: 64px;
+	left: 42px;
 }
 
-.players #p8 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p8 {
 	top: 150px;
 	left: 42px;
 }
 
-.players #p9 {
-	background: inherit;
-	height: inherit;
-	width: inherit;
-	position:absolute;
+#p9 {
 	top: 55px;
 	left: 170px;
 }
 
-.pokerTable #playerActions {
-	position: absolute;
+#playerActions {
+	float: right;
+	
 	background: blue;
-	bottom: 55px;
-	right: 10px;
 	height: 100px;
 	width: 250px;
 }
 
-.pokerTable #chat {
-	position: absolute;
-	left: 10px;
-	bottom: 45px;
+#chat {
+	float: left;
 	height: 100px;
 	width: 200px;
 }
 
 .playerAction {
 	width: 30%;
+	height: 100px;
+	background-color: yellow;
 	
+}
+
+#handInfo {
+	position: absolute;
+	background-color: white;
+	top: 200px;
+	left: 200px;
+	float: center;
+	width: 375px;
+}
+
+#communityCards {
+	background-color: orange;
+}
+
+#pot {
+	background-color: turquoise;
+}
+
+#playerCards {
+	overflow: hidden;
+	height: 30px;
+}
+
+#playerName {
+	background-color: white;
+	color: black;
+
+}
+
+#playerMoney {
+	
+}
+
+#playerCards img {
+	width: 75%;
+}
+
+#holeCard1 {
+	position: absolute;
+	overflow: hidden;
+	bottom: 35px;
+/*	width: 25px;*/
+}
+
+#holeCard2 {
+	position: absolute;
+	overflow: hidden;
+	bottom: 35px;
+	left: 25px;
 }
