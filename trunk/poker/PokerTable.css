@@ -32,6 +32,14 @@ body {
 	background-color: green;
 	color: black;
 }
+#exit {
+/*	position: relative;*/
+	float: right;
+	background-image: url("images/exit.png");
+	height: 70px;
+	width: 100px;
+		
+}
 
 .players {
 	background-image: url("images/playa.png");
@@ -86,23 +94,26 @@ body {
 	left: 170px;
 }
 
-#playerActions {
-	float: right;
-	position:relative;
-	height: 100px;
-	width: 250px;
-}
-
 #chat {
 	float: left;
 	height: 100px;
 	width: 200px;
 }
 
-.playerAction {
-	width: 30%;
+#playerActions {
+	float: right;
+	position:relative;
 	height: 100px;
-	background-color: yellow;
+	width: 320px;	
+}
+
+.playerAction {
+	background-image: url("images/buttons.png");
+	width: 100px;
+	height: 50px;
+	background-color: transparent;
+	border: inactiveborder;
+	color: white;
 	
 }
 
@@ -158,3 +169,5 @@ body {
 	bottom: 39px;
 	left: 50px;
 }
+
+	
