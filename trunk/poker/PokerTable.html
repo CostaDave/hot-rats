@@ -1,11 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<script type="text/javascript" src="scripts/jquery-1.5.1.js"></script>
+		<script type="text/javascript" src="scripts/functions.js"></script>		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>Texas Hold 'em</title>
 		<link rel="stylesheet" type="text/css" href="PokerTable.css" />
+		
 	</head>
 	<body>
+		<div id="box" class="dialog" style="clear:both">
+			<div style="text-align:center">
+				<form id="vorm" action="">
+					Nimi: <input id="n1" name="player" type="text" />
+					Vali koht lauas: <select id="seat" value="1">
+					    <option value="1">#1</option>
+					    <option value="2">#2</option>
+					    <option value="3">#3</option>
+					    <option value="4">#4</option>
+					    <option value="5">#5</option>
+					    <option value="6">#6</option>
+					    <option value="7">#7</option>
+					    <option value="8">#8</option>
+					    <option value="9">#9</option>   
+				    </select>										
+				</form>
+				<button onclick="hm('box');okSelected(getName(), getSeat())">OK</button>
+			</div>
+		</div>
+	
+		
+	
 		<div class="pokerTable">
 			<div id="dealer"></div>
 			<div id="exit"></div>
@@ -136,11 +161,12 @@
 				<textarea rows="4" cols="30">Chat</textarea>
 				<input type="text" />
 				<input type="button" value="Send" />
+				<input type="button" onclick="sm('box',200,50);" value="Start"/>
 			</div>	
 			<div id="playerActions">
-				<input class="playerAction" type="submit" value="Fold" />
-				<input class="playerAction" type="submit" value="Bet" />
-				<input class="playerAction" type="submit" value="Raise" />
+				<input class="playerAction" id="foldButton" type="submit" value="Fold" />
+				<input class="playerAction" id="submitButton" type="submit" value="Bet" />
+				<input class="playerAction" id="raiseButton" type="submit" value="Raise" />
 				<input type="text" />
 			</div>
 		</div>

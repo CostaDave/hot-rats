@@ -14,10 +14,14 @@ html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, pre, code, address, variable,
 }
 
 html {
-	background: green;
+	background: #000096;
+	background-image: url("images/bg.png");
+	background-position: center;
+	background-repeat: repeat-y;
 }
 body {
-	background: green;
+	/*background: #000096;*/
+	
 	margin:auto;
 	height: 600px;
 	width: 800px;
@@ -29,7 +33,7 @@ body {
 	width: 800px;
 	
 	background-image: url("images/ft_green_poker_skin.png");	
-	background-color: green;
+	/*background-color: #000096;*/
 	color: black;
 }
 #exit {
@@ -122,7 +126,7 @@ body {
 	background-color: transparent;
 	top: 200px;
 	left: 200px;
-	float: center;
+	/*float: center;*/
 	width: 375px;
 }
 
@@ -169,5 +173,35 @@ body {
 	bottom: 39px;
 	left: 50px;
 }
+
+/* modalBox osa */
+
+#mbox{
+	background-color:#eee; 
+	padding:8px; 
+	border:2px outset #666;
+}
+#mbm{
+	font-family:sans-serif;
+	font-weight:bold;
+	float:right;
+	padding-bottom:5px;
+}
+#ol{
+	background-image: url(images/overlay.png);
+}
+#seat{
+	visibility:visible;
+}
+.dialog {
+	display:none;
+}
+
+* html #ol{
+	background-image:none; 
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="images/overlay.png", sizingMethod="scale");
+}
+           
+/* --- */
 
 	
