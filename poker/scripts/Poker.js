@@ -21,7 +21,8 @@ Deck = function() {
 	this.cards = new Array();
 	for (rank in RANKS) {
 		for (suit in SUITS) {
-			this.cards.push(new Card(rank, suit));
+			console.log('suit : ' + RANKS[rank] + ' rank : ' + SUITS[suit]);
+			this.cards.push(new Card(RANKS[rank], SUITS[suit]));
 		}
 	}
 };
@@ -31,9 +32,9 @@ Deck.prototype = {
 	shuffle : function() {
 		deckSize = this.cards.length;
 		for (i = 0; i < deckSize; i++) {
-			card = this.cards[i]; // Take card out of deck
-			randIndex = Math.floor(Math.random()*deckSize); // Choose random card
-			randCard = this.cards[randIndex]; // Take it "out of deck"
+			card = this.cards[i]; // Take next card out of deck
+			randIndex = Math.floor(Math.random()*deckSize); // Choose random position in deck
+			randCard = this.cards[randIndex]; // Take card from there
 			this.cards[i] = randCard; // Change their places
 			this.cards[randIndex] = card;
 		}
