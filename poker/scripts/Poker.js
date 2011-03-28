@@ -2,11 +2,49 @@ var PlayerNames = ['Aadu', 'Peeter', 'Rein',
                    'Madis', 'Siim', 'Taavet',
                    'Mari', 'Liis', 'Teele'];
 
+var SUITS = ['c','d','h','s'];
+var RANKS = ['2','3','4','5','6','7','8','9','T','J','Q','K','A'];
+
+Card = function(rank, suit) {
+	this.rank = rank;
+	this.suit = suit;
+};
+
+Card.prototype = {
+	constructor : this.Card,
+	htmlValue : function() {
+		// TODO: should return HTML representation of itself
+	}
+};
+
+Deck = function() {
+	this.cards = new Array();
+	for (rank in RANKS) {
+		for (suit in SUITS) {
+			this.cards.push(new Card(rank, suit));
+		}
+	}
+};
+
+Deck.prototype = {
+	constructor : this.Deck,
+	shuffle : function() {
+		deckSize = this.cards.length;
+		for (i = 0; i < deckSize; i++) {
+			card = this.cards[i]; // Take card out of deck
+			randIndex = Math.floor(Math.random()*deckSize); // Choose random card
+			randCard = this.cards[randIndex]; // Take it "out of deck"
+			this.cards[i] = randCard; // Change their places
+			this.cards[randIndex] = card;
+		}
+	}
+};
+
 Player = function(name, money, seat) {
-		this.BBSize = 2;
 		this.name = name;
 		this.money = money;
 		this.seat = seat;
+		this.hand = new Array();
 		this.button = false;
 };
 
@@ -17,18 +55,21 @@ Player.prototype = {
 			$('.playerMoney', this.seat).html(this.money);
 			$('.playerName', this.seat).html(this.name);
 		},
-		postSB : function() {
-			// TODO: it would be better to have TableManager responsible of carrying out this action
-			money -= BBSize / 2;
-			return BBSize / 2;
+		postBlind : function(blindSize) {
+			money -= blindSize;
+			return BBSize;
 		},
 		isDealer : function() {
 			return button;
+		},
+		addCard : function(card) {
+			this.hand.push(card);
 		}
 };
 
 // There should be only 1 table manager per page
 function TableManager() {
+	this.BB = 2; // Size of the big blind. 
 	this.players = new Array(); // Holds player objects
 	this.allInPlayers = new Array(); // When a player is all in he would be taken out of this.players and be put here
 	this.actions = new Array(); // Will hold an array of actions. All actions concerning the game and players should be defined as functions in TableManager.actions
@@ -37,7 +78,6 @@ function TableManager() {
 }
 
 TableManager.prototype = {
-		
 		constructor : TableManager,
 		initGame : function(){
 			for(i=1;i<10;i++){	
@@ -48,9 +88,8 @@ TableManager.prototype = {
 		},
 		startGame : function() {
 			positionDealerButton();
-			
-//			collectBlinds
-//			dealHoleCards();
+			collectBlinds();
+			dealHoleCards();
 //			preFlopBetting();
 //			dealFlop();
 //			thirdStreetBetting();
@@ -75,6 +114,58 @@ TableManager.prototype.positionDealerButton = function() {
 	randomPlayer = Math.floor(Math.random()*this.players.length);
 	this.players[randomPlayer].button = true;
 	return 'Dealer button initially given to ' + this.players[randomPlayer];
+};
+
+TableManager.prototype.addToPot = function(amountAdded) {
+	// TODO: update pot on poker table, add money to pot
+	this.pot += amountAdded;
+};
+
+TableManager.prototype.nextPlayerAfter = function(currentPlayer) {
+	
+	index = 0;
+	foundAt = -1;
+	for (player in this.players) {
+		index += 1;
+		if (player == currentPlayer) {
+			foundAt = index;
+			break;
+		}
+	}
+	// TODO: Usalda, aga kontrolli!!! Siit v6ib hakata vigu viskama. Ma pole p2ris kindel
+	return foundAt <= this.players.length ? this.players[foundAt+1] : this.players[0];
+};
+
+TableManager.prototype.findButtonPlayer = function() {
+	// TODO: find  and return player from this.players whose .button property is true
+	buttonPlayer = null;
+	for (player in this.players) {
+		if (player.button == true) {
+			buttonPlayer = player;
+			break;
+		}
+	}
+	if (buttonPlayer == null) {
+		buttonPlayer = this.players[0];
+	}
+	return buttonPlayer;
+};
+
+TableManager.prototype.collectBlinds = function() {
+	dealerPlayer = this.findButtonPlayer();
+	sbPlayer = this.nextPlayerAfter(dealerPlayer);
+	bbPlayer = this.nextPlayerAfter(sbPlayer);
+	this.addToPot(sbPlayer.postBlind(this.BB / 2));
+	this.addToPot(bbPlayer.postBlind(this.BB));
+};
+
+TableManager.prototype.dealHoleCards = function() {
+	nextPlayer = this.nextPlayerAfter(this.findButtonPlayer());
+	this.deck.shuffle();
+	for (i = 0; i < this.players.length * 2; i++) { // Go through all players twice, beginning with player after dealer (small blind)
+		nextPlayer.addHoleCard(this.deck.nextCard());
+		nextPlayer = this.nextPlayerAfter(nextPlayer);
+	}
 };
 
 $(document).ready(function(){
