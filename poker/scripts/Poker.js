@@ -4,7 +4,7 @@ var PlayerNames = ['Aadu', 'Peeter', 'Rein',
 
 var SUITS = ['c','d','h','s'];
 var RANKS = ['2','3','4','5','6','7','8','9','T','J','Q','K','A'];
-var CARDS_PATH = '../images/deck/';
+var CARDS_PATH = './images/deck/';
 var CARD_IMAGES = {
 	'Ad':'101.png',	'Ac':'114.png',	'Ah':'127.png', 'As':'140.png',
 	'2d':'102.png',	'2c':'115.png',	'2h':'128.png',	'2s':'141.png',
@@ -21,6 +21,7 @@ var CARD_IMAGES = {
 	'Kd':'113.png',	'Kc':'126.png', 'Kh':'139.png', 'Ks':'152.png'
 };
 
+
 Card = function(rank, suit) {
 	this.rank = rank;
 	this.suit = suit;
@@ -32,9 +33,9 @@ Card.prototype = {
 		return this.rank+this.suit;
 	},
 	htmlValue : function() {
-				
-		
 		// TODO: should return HTML representation of itself
+		htmlString = '<img src="'+CARDS_PATH+CARD_IMAGES[this.cardKey()] + '"></img>';
+		return htmlString;
 	}
 };
 
@@ -92,6 +93,10 @@ Player.prototype = {
 			return this.button;
 		},
 		addCard : function(card) {
+			//if(this.hand.length == 1) {$('.holeCard1', this.seat).htmlValue(card.htmlValue());
+			if($('#p1 > div.playerCards > div.holeCard1').has("img")){
+				$('#p1 > div.playerCards > div.holeCard2').html(card.htmlValue());
+			}else{$('#p1 > div.playerCards > div.holeCard1').html(card.htmlValue());}
 			this.hand.push(card);
 		},
 		getActionForTableInfo : function(tableInfo) {
