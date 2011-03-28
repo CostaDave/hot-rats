@@ -4,6 +4,11 @@ var PlayerNames = ['Aadu', 'Peeter', 'Rein',
 
 var SUITS = ['c','d','h','s'];
 var RANKS = ['2','3','4','5','6','7','8','9','T','J','Q','K','A'];
+var CARDS_PATH = '../images/deck';
+var CARD_IMAGES = {
+	'Ad':'101.png',
+	'2d':'102.png' // TODO: add other cards
+}
 
 Card = function(rank, suit) {
 	this.rank = rank;
@@ -12,6 +17,9 @@ Card = function(rank, suit) {
 
 Card.prototype = {
 	constructor : this.Card,
+	cardKey : function() {
+		return rank+suit;
+	},
 	htmlValue : function() {
 		// TODO: should return HTML representation of itself
 	}
@@ -38,6 +46,9 @@ Deck.prototype = {
 			this.cards[i] = randCard; // Change their places
 			this.cards[randIndex] = card;
 		}
+	},
+	nextCard : function() {
+		
 	}
 };
 
@@ -164,7 +175,7 @@ TableManager.prototype.dealHoleCards = function() {
 	nextPlayer = this.nextPlayerAfter(this.findButtonPlayer());
 	this.deck.shuffle();
 	for (i = 0; i < this.players.length * 2; i++) { // Go through all players twice, beginning with player after dealer (small blind)
-		nextPlayer.addHoleCard(this.deck.nextCard());
+		nextPlayer.addCard(this.deck.nextCard());
 		nextPlayer = this.nextPlayerAfter(nextPlayer);
 	}
 };
