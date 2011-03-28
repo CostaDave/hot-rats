@@ -8,7 +8,8 @@ Player = function(name, money, seat) {
 		this.money = money;
 		this.seat = seat;
 		this.button = false;
-	};
+};
+
 	
 Player.prototype = {
 		constructor : this.Player,
@@ -24,7 +25,7 @@ Player.prototype = {
 		isDealer : function() {
 			return button;
 		}
-	};
+};
 
 // There should be only 1 table manager per page
 function TableManager() {
@@ -43,7 +44,7 @@ TableManager.prototype = {
 				player = new Player(PlayerNames[i-1],1000,$('#p'+i));
 				player.draw();
 				this.players.push(player);
-			}	
+			}		
 		},
 		startGame : function() {
 			positionDealerButton();
