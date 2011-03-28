@@ -89,7 +89,7 @@ Player.prototype = {
 			return BBSize;
 		},
 		isDealer : function() {
-			return button;
+			return this.button;
 		},
 		addCard : function(card) {
 			this.hand.push(card);
@@ -125,10 +125,10 @@ TableManager.prototype = {
 		},
 		startGame : function() {
 			this.deck.shuffle();
-			positionDealerButton();
-			collectBlinds();
-			dealHoleCards();
-			preFlopBetting();
+			this.positionDealerButton();
+			this.collectBlinds();
+			this.dealHoleCards();
+			this.preFlopBetting();
 //			dealFlop();
 //			thirdStreetBetting();
 //			dealTurn();
@@ -175,11 +175,12 @@ TableManager.prototype.nextPlayerAfter = function(currentPlayer) {
 };
 
 TableManager.prototype.findButtonPlayer = function() {
-	// TODO: find  and return player from this.players whose .button property is true
+	// TODO: add moveButtonForward method
 	buttonPlayer = null;
 	for (player in this.players) {
 		if (player.button == true) {
 			buttonPlayer = player;
+			player.button = true;
 			break;
 		}
 	}
