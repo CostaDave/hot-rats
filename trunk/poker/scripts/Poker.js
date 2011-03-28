@@ -4,10 +4,21 @@ var PlayerNames = ['Aadu', 'Peeter', 'Rein',
 
 var SUITS = ['c','d','h','s'];
 var RANKS = ['2','3','4','5','6','7','8','9','T','J','Q','K','A'];
-var CARDS_PATH = '../images/deck';
+var CARDS_PATH = '../images/deck/';
 var CARD_IMAGES = {
-	'Ad':'101.png',
-	'2d':'102.png' // TODO: add other cards
+	'Ad':'101.png',	'Ac':'114.png',	'Ah':'127.png', 'As':'140.png',
+	'2d':'102.png',	'2c':'115.png',	'2h':'128.png',	'2s':'141.png',
+	'3d':'103.png',	'3c':'116.png',	'3h':'129.png', '3s':'142.png',
+	'4d':'104.png',	'4c':'117.png',	'4h':'130.png',	'4s':'143.png',
+	'5d':'105.png',	'5c':'118.png',	'5h':'131.png', '5s':'144.png',
+	'6d':'106.png',	'6c':'119.png',	'6h':'132.png', '6s':'145.png',
+	'7d':'107.png',	'7c':'120.png',	'7h':'133.png', '7s':'146.png',
+	'8d':'108.png',	'8c':'121.png',	'8h':'134.png', '8s':'147.png',
+	'9d':'109.png',	'9c':'122.png',	'9h':'135.png', '9s':'148.png',
+	'Td':'110.png',	'Tc':'123.png',	'Th':'136.png', 'Ts':'149.png',
+	'Jd':'111.png',	'Jc':'124.png', 'Jh':'137.png', 'Js':'150.png',
+	'Qd':'112.png',	'Qc':'125.png', 'Qh':'138.png', 'Qs':'151.png',
+	'Kd':'113.png',	'Kc':'126.png', 'Kh':'139.png', 'Ks':'152.png';
 }
 
 Card = function(rank, suit) {
@@ -21,6 +32,8 @@ Card.prototype = {
 		return rank+suit;
 	},
 	htmlValue : function() {
+				
+		
 		// TODO: should return HTML representation of itself
 	}
 };
@@ -60,7 +73,6 @@ Player = function(name, money, seat) {
 		this.button = false;
 		this.brain = undefined;
 };
-
 	
 Player.prototype = {
 		constructor : this.Player,
