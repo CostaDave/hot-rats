@@ -14,16 +14,16 @@
 			<div style="text-align:center">
 				<form id="vorm" action="">
 					Nimi: <input id="n1" name="player" type="text" />
-					Vali koht lauas: <select id="seat" value="1">
-					    <option value="1">#1</option>
-					    <option value="2">#2</option>
-					    <option value="3">#3</option>
-					    <option value="4">#4</option>
-					    <option value="5">#5</option>
-					    <option value="6">#6</option>
-					    <option value="7">#7</option>
-					    <option value="8">#8</option>
-					    <option value="9">#9</option>   
+					Vali koht lauas: <select id="seat">
+					    <option value="p1">#1</option>
+					    <option value="p2">#2</option>
+					    <option value="p3">#3</option>
+					    <option value="p4">#4</option>
+					    <option value="p5">#5</option>
+					    <option value="p6">#6</option>
+					    <option value="p7">#7</option>
+					    <option value="p8">#8</option>
+					    <option value="p9">#9</option>   
 				    </select>										
 				</form>
 				<button onclick="hm('box');okSelected(getName(), getSeat())">OK</button>
@@ -36,112 +36,112 @@
 			<div id="dealer"></div>
 			<div id="exit"></div>
 			<div id="p1" class="players">
-				<div id="playerCards">
-					<div id="holeCard1">
+				<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/116.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/119.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Esimene</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Esimene</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p2" class="players">
-				<div id="playerCards">
-					<div id="holeCard1">
+				<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/108.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/132.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Teine</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Teine</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p3" class="players">
-			<div id="playerCards">
-					<div id="holeCard1">
+			<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/124.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/131.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Kolmas</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Kolmas</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p4" class="players">
-			<div id="playerCards">
-					<div id="holeCard1">
+			<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/111.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/125.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Neljas</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Neljas</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p5" class="players">
-				<div id="playerCards">
-					<div id="holeCard1">
+				<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/114.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/115.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Viies</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Viies</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p6" class="players">
-				<div id="playerCards">
-					<div id="holeCard1">
+				<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/155.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/155.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Kuues</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Kuues</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p7" class="players">
-				<div id="playerCards">
-					<div id="holeCard1">
+				<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/144.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/119.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Seitsmes</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Seitsmes</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p8" class="players">
-				<div id="playerCards">
-					<div id="holeCard1">
+				<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/142.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/152.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Kaheksas</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Kaheksas</div>
+				<div class="playerMoney">100</div>
 			</div>
 			<div id="p9" class="players">
-				<div id="playerCards">
-					<div id="holeCard1">
+				<div class="playerCards">
+					<div class="holeCard1">
 						<img src="images/deck/141.png" alt="Ac" />
 					</div>
-					<div id="holeCard2">
+					<div class="holeCard2">
 						<img src="images/deck/140.png" alt="2c" />
 					</div>
 				</div>
-				<div id="playerName">Üheksas</div>
-				<div id="playerMoney">100</div>
+				<div class="playerName">Üheksas</div>
+				<div class="playerMoney">100</div>
 			</div>
 			
 			<div id="handInfo">
