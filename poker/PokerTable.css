@@ -49,8 +49,8 @@ body {
 #exit {
 /*	position: relative;*/
 	position: absolute;
-	top: 2px;
-	left: 655px;
+	top: 0px;
+	left: 640px;
 	background-image: url("images/exit_2.png");
 	width: 200px;
 	height: 90px;
