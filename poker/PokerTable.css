@@ -140,34 +140,34 @@ body {
 	background-color: transparent;
 }
 
-#playerCards {
+.playerCards {
 	overflow: hidden;
 }
 
-#playerName {
+.playerName {
 	position: relative;
 	top: 18px;
 	text-align: center;
 }
 
-#playerMoney {
+.playerMoney {
 	position: relative;
 	top: 15px;
 	text-align: center;	
 }
 
-#playerCards img {
+.playerCards img {
 	width: 65%;
 }
 
-#holeCard1 {
+.holeCard1 {
 	position: absolute;
 	overflow: hidden;
 	left: 25px;
 	bottom: 44px;
 }
 
-#holeCard2 {
+.holeCard2 {
 	position: absolute;
 	overflow: hidden;
 	bottom: 39px;

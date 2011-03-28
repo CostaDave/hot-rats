@@ -54,7 +54,8 @@ function sm(obl, wd, ht){
 	var obbx=$('mbox');
 	obbx.style.top=(tp<0?0:tp)+p;
 	obbx.style.left=(lt<0?0:lt)+p;
-	obbx.style.width=wd+p;obbx.style.height=ht+p;
+	obbx.style.width=wd+p;
+	obbx.style.height=ht+p;
 	/*inf(h);*/
 	obbx.style.display=b;
 	return false;
@@ -97,9 +98,11 @@ window.onload = initmb;
 
 var playerName = '';
 var playerSeat;
+
 function okSelected(name, seat) {
 	playerName = name;
 	playerSeat = seat;
+	document.getElementById(seat);
 }
 
 function getName(){
