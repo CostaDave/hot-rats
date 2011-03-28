@@ -14,7 +14,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, pre, code, address, variable,
 }
 
 html {
-	background: #000096;
+	background: #333333;
 	background-image: url("images/bg.png");
 	background-position: center;
 	background-repeat: repeat-y;
@@ -37,15 +37,26 @@ body {
 	color: black;
 }
 #start {
+	background-image: url("images/join.png");
 	float: left;
+	width: 200px;
+	height: 90px;
+	background-repeat: no-repeat;
 	
 }
+
+
+
 #exit {
 /*	position: relative;*/
-	float: right;
-	background-image: url("images/exit.png");
-	height: 70px;
-	width: 100px;
+	position: absolute;
+	top: 2px;
+	left: 655px;
+	background-image: url("images/exit_2.png");
+	width: 200px;
+	height: 90px;
+	background-repeat: no-repeat;
+	
 		
 }
 
