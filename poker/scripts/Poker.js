@@ -58,6 +58,7 @@ Player = function(name, money, seat) {
 		this.seat = seat;
 		this.hand = new Array();
 		this.button = false;
+		this.brain = undefined;
 };
 
 	
@@ -76,6 +77,13 @@ Player.prototype = {
 		},
 		addCard : function(card) {
 			this.hand.push(card);
+		},
+		getActionForTableInfo : function(tableInfo) {
+			// In our quite primitive version tableInfo is just the size of the last bet
+			// Will return a dictionary with info about the move player decided to make
+			// action = this.brain(tableInfo);
+			action = {'action':'fold'};
+			return action;
 		}
 };
 
@@ -102,7 +110,7 @@ TableManager.prototype = {
 			positionDealerButton();
 			collectBlinds();
 			dealHoleCards();
-//			preFlopBetting();
+			preFlopBetting();
 //			dealFlop();
 //			thirdStreetBetting();
 //			dealTurn();
@@ -177,6 +185,21 @@ TableManager.prototype.dealHoleCards = function() {
 	for (i = 0; i < this.players.length * 2; i++) { // Go through all players twice, beginning with player after dealer (small blind)
 		nextPlayer.addCard(this.deck.nextCard());
 		nextPlayer = this.nextPlayerAfter(nextPlayer);
+	}
+};
+
+TableManager.prototype.doPlayerAction = function(actionDict) {
+	if (actionDict['action'] == 'fold') {
+		// TODO: fold player, make him inactive in players list (somehow :S)
+	}
+};
+
+TableManager.prototype.preFlopBetting = function() {
+	nextPlayer = this.nextPlayerAfter(this.findButtonPlayer());
+	while (this.playersLeftToBet()) {
+		actionDict = nextPlayer.getActionForTableInfo({'lastBet':100});
+		this.doAction(actionDict);
+		
 	}
 };
 
