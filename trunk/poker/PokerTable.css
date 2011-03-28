@@ -153,6 +153,11 @@ body {
 	color: white;
 	background-color: transparent;
 }
+#bet {
+	text-align: center;
+	color: white;
+	background-color: transparent;
+}
 
 .playerCards {
 	overflow: hidden;
