@@ -29,7 +29,7 @@ Card = function(rank, suit) {
 Card.prototype = {
 	constructor : this.Card,
 	cardKey : function() {
-		return rank+suit;
+		return this.rank+this.suit;
 	},
 	htmlValue : function() {
 				
