@@ -36,6 +36,10 @@ body {
 	/*background-color: #000096;*/
 	color: black;
 }
+#start {
+	float: left;
+	
+}
 #exit {
 /*	position: relative;*/
 	float: right;
