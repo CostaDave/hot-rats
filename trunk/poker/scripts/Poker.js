@@ -195,10 +195,11 @@ TableManager.prototype.doPlayerAction = function(actionDict) {
 };
 
 TableManager.prototype.preFlopBetting = function() {
+	// TODO: in first round betting starts from player UTG (next to BB)
 	nextPlayer = this.nextPlayerAfter(this.findButtonPlayer());
 	while (this.playersLeftToBet()) {
 		actionDict = nextPlayer.getActionForTableInfo({'lastBet':100});
-		this.doAction(actionDict);
+		this.doPlayerAction(actionDict);
 		
 	}
 };
