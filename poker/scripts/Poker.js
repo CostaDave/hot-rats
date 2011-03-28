@@ -18,8 +18,8 @@ var CARD_IMAGES = {
 	'Td':'110.png',	'Tc':'123.png',	'Th':'136.png', 'Ts':'149.png',
 	'Jd':'111.png',	'Jc':'124.png', 'Jh':'137.png', 'Js':'150.png',
 	'Qd':'112.png',	'Qc':'125.png', 'Qh':'138.png', 'Qs':'151.png',
-	'Kd':'113.png',	'Kc':'126.png', 'Kh':'139.png', 'Ks':'152.png';
-}
+	'Kd':'113.png',	'Kc':'126.png', 'Kh':'139.png', 'Ks':'152.png'
+};
 
 Card = function(rank, suit) {
 	this.rank = rank;
@@ -40,6 +40,7 @@ Card.prototype = {
 
 Deck = function() {
 	this.cards = new Array();
+	this.nextCardIndex = 0;
 	for (rank in RANKS) {
 		for (suit in SUITS) {
 			console.log('suit : ' + RANKS[rank] + ' rank : ' + SUITS[suit]);
@@ -51,6 +52,7 @@ Deck = function() {
 Deck.prototype = {
 	constructor : this.Deck,
 	shuffle : function() {
+		this.nextCardIndex = 0;
 		deckSize = this.cards.length;
 		for (i = 0; i < deckSize; i++) {
 			card = this.cards[i]; // Take next card out of deck
@@ -61,7 +63,9 @@ Deck.prototype = {
 		}
 	},
 	nextCard : function() {
-		
+		retCard = this.cards[this.nextCardIndex];
+		this.nextCardIndex += 1;
+		return retCard;
 	}
 };
 
@@ -107,6 +111,7 @@ function TableManager() {
 	this.actions = new Array(); // Will hold an array of actions. All actions concerning the game and players should be defined as functions in TableManager.actions
 	this.pot = 0; // Sum of all the bets thus far
 	this.board = new Array(); // Array of cards. When table is being drawn or new cards dealt, this is where the cards are asked/put.
+	this.deck = new Deck();
 }
 
 TableManager.prototype = {
@@ -119,6 +124,7 @@ TableManager.prototype = {
 			}		
 		},
 		startGame : function() {
+			this.deck.shuffle();
 			positionDealerButton();
 			collectBlinds();
 			dealHoleCards();
