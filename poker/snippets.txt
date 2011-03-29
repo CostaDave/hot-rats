@@ -1,0 +1,2 @@
+// Move dealer button forward manually
+tableManager.positionDealerButton(tableManager.nextPlayerAfter(tableManager.findButtonPlayer()))
