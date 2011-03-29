@@ -341,7 +341,6 @@ $(document).ready(function(){
 	enableJoinButton();
 	$('#exit').click(leaveGame);
 });
-;
 
 nextBigThing = function(){
 	if (nextBigThing.step == undefined) {
