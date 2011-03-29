@@ -34,7 +34,6 @@ Card.prototype = {
 		return this.rank+this.suit;
 	},
 	htmlValue : function() {
-		// TODO: should return HTML representation of itself
 		htmlString = '<img src="'+CARDS_PATH+CARD_IMAGES[this.cardKey()] + '"></img>';
 		return htmlString;
 	}
@@ -297,6 +296,11 @@ function logToChat(str){
 	txt.val(str + '\n' + txt.val());
 }
 
+function disableJoinButton(){
+	$("#startGame").css("background-image", "url(./images/join_g.png)");
+	$("#startGame").click(function(){});			
+}
+
 $(document).ready(function(){
 	$("#startGame").click(function(){
 		tableManager = new TableManager();
@@ -304,6 +308,7 @@ $(document).ready(function(){
 		tableManager.initGame();
 		// tableManager.buyInPlayers(); // TODO: initGame should only initialize TableManager, players should be bought in here
 		tableManager.startGame();
+		disableJoinButton();
 		
 	});
 });
