@@ -1,4 +1,4 @@
-var PlayerNames = ['Aadu', 'Peeter', 'Rein', 
+var PlayerNames = ['Aadu', 'Peeter', 'Reina', 
                    'Madis', 'Siim', 'Taavet',
                    'Mari', 'Liis', 'Teele'];
 
@@ -21,6 +21,7 @@ var CARD_IMAGES = {
 	'Kd':'113.png',	'Kc':'126.png', 'Kh':'139.png', 'Ks':'152.png'
 };
 
+var DEALER_BUTTON_HTML = '<img src="images/d_button.png">';
 
 Card = function(rank, suit) {
 	this.rank = rank;
@@ -44,7 +45,6 @@ Deck = function() {
 	this.nextCardIndex = 0;
 	for (rank in RANKS) {
 		for (suit in SUITS) {
-			console.log('suit : ' + RANKS[rank] + ' rank : ' + SUITS[suit]);
 			this.cards.push(new Card(RANKS[rank], SUITS[suit]));
 		}
 	}
@@ -77,8 +77,10 @@ Player = function(name, money, seat) {
 		this.hand = new Array();
 		this.button = false;
 		this.brain = undefined;
+		this.canContinuePlaying = false;
+		this.isAllIn = false;
 };
-	
+
 Player.prototype = {
 		constructor : this.Player,
 		draw : function() {
@@ -86,11 +88,21 @@ Player.prototype = {
 			$('.playerName', this.seat).html(this.name);
 		},
 		postBlind : function(blindSize) {
-			money -= blindSize;
-			return BBSize;
+			this.money -= blindSize;
+			$('.playerMoney', this.seat).text(this.money);
+			return blindSize;
 		},
 		isDealer : function() {
 			return this.button;
+		},
+		setIsDealer : function(buttonForMe) {
+			// TODO: draw a dealer button if buttonForMe == true
+			this.button = buttonForMe;
+			if (buttonForMe) {
+				$('.dealer', this.seat).html(DEALER_BUTTON_HTML);
+			} else {
+				$('.dealer', this.seat).html('');
+			}
 		},
 		addCard : function(card) {
 			//if(this.hand.length == 1) {$('.holeCard1', this.seat).htmlValue(card.htmlValue());
@@ -105,6 +117,12 @@ Player.prototype = {
 			// action = this.brain(tableInfo);
 			action = {'action':'fold'};
 			return action;
+		},
+		isInHand : function() {
+			if (this.canContinuePlaying) {
+				return true;
+			}
+			return false;
 		}
 };
 
@@ -124,7 +142,7 @@ TableManager.prototype = {
 		initGame : function(){
 			for(i=1;i<10;i++){	
 				player = new Player(PlayerNames[i-1],1000,$('#p'+i));
-				log(PlayerNames[i-1] + " liitus lauaga.");
+				logToChat(PlayerNames[i-1] + " joined the game.");
 				player.draw();
 				this.players.push(player);
 			}		
@@ -146,61 +164,63 @@ TableManager.prototype = {
 };
 
 TableManager.prototype.positionDealerButton = function() {
+	dealerSelectionMsg = '';
+	previousDealerFound = false;
+	dealerPlayer = undefined;
 	// If someone already has the dealer button, move it forward
-	for (player in this.players) {
+	for (var p in this.players) {
+		player = this.players[p];
 		if (player.isDealer() == true) {
-			player.button = false; // Take button from previous player
-			nextPlayer(player).button = true; // Give it to next
-			return 'Dealer button given to ' + nextPlayer.name;
-		}
-	}
-	// If there is no previous dealer, give button to random player
-	randomPlayer = Math.floor(Math.random()*this.players.length);
-	this.players[randomPlayer].button = true;
-	return 'Dealer button initially given to ' + this.players[randomPlayer];
-};
-
-TableManager.prototype.addToPot = function(amountAdded) {
-	// TODO: update pot on poker table, add money to pot
-	this.pot += amountAdded;
-};
-
-TableManager.prototype.nextPlayerAfter = function(currentPlayer) {
-	
-	index = 0;
-	foundAt = -1;
-	for (player in this.players) {
-		index += 1;
-		if (player == currentPlayer) {
-			foundAt = index;
+			player.setIsDealer(false); // Take button from previous player
+			nextPlayer(player).setIsDealer(true); // Give it to next
+			dealerSelectionMsg = 'Dealer button given to ' + nextPlayer.name;
+			previousDealerFound = true;
 			break;
 		}
 	}
-	// TODO: Usalda, aga kontrolli!!! Siit v6ib hakata vigu viskama. Ma pole p2ris kindel
-	return foundAt <= this.players.length ? this.players[foundAt+1] : this.players[0];
+	if (previousDealerFound == false) {
+		// If there is no previous dealer, give button to random player
+		randomPlayerIndex = Math.floor(Math.random()*this.players.length);
+		randomDealer = this.players[randomPlayerIndex];
+		randomDealer.setIsDealer(true);
+		dealerSelectionMsg = 'Dealer button randomly given to ' + randomDealer.name;
+	}
+	logToChat(dealerSelectionMsg);
+	return dealerSelectionMsg;
+};
+
+TableManager.prototype.addToPot = function(amountAdded) {
+	this.pot += amountAdded;
+	$('#pot').text('Pot: ' + this.pot);
+};
+
+TableManager.prototype.nextPlayerAfter = function(currentPlayer) {
+	currentPlayerIndex = this.players.indexOf(currentPlayer);
+	return currentPlayerIndex < this.players.length - 1 ? this.players[currentPlayerIndex+1] : this.players[0];
 };
 
 TableManager.prototype.findButtonPlayer = function() {
 	// TODO: add moveButtonForward method
 	buttonPlayer = null;
-	for (player in this.players) {
+	for (p in this.players) {
+		player = this.players[p];
 		if (player.button == true) {
 			buttonPlayer = player;
-			player.button = true;
 			break;
 		}
 	}
-	if (buttonPlayer == null) {
-		buttonPlayer = this.players[0];
-	}
+	console.log('Found button player ' + buttonPlayer.name);
 	return buttonPlayer;
 };
 
 TableManager.prototype.collectBlinds = function() {
 	dealerPlayer = this.findButtonPlayer();
+	console.log('Starting to collect blinds. Dealer is : ' + dealerPlayer.name);
 	sbPlayer = this.nextPlayerAfter(dealerPlayer);
 	bbPlayer = this.nextPlayerAfter(sbPlayer);
+	logToChat('Added SB of ' + this.BB/2 + ' from ' + sbPlayer.name + ' to pot');
 	this.addToPot(sbPlayer.postBlind(this.BB / 2));
+	logToChat('Added BB of ' + this.BB + ' from ' + bbPlayer.name + ' to pot');
 	this.addToPot(bbPlayer.postBlind(this.BB));
 };
 
@@ -215,9 +235,21 @@ TableManager.prototype.dealHoleCards = function() {
 
 TableManager.prototype.doPlayerAction = function(actionDict) {
 	if (actionDict['action'] == 'fold') {
-		log("Foldis.");
+		logToChat("Folded");
 		// TODO: fold player, make him inactive in players list (somehow :S)
 	}
+};
+
+// Should return true when at least 2 players are still in hand
+TableManager.prototype.playersLeftToBet = function() {
+	playersInHand = 0;
+	for (var p in this.players) {
+		player = this.players[p];
+		if (player.isInHand()) {
+			playersInHand += 1;
+		}
+	}
+	return playersInHand > 1 ? true : false;
 };
 
 TableManager.prototype.preFlopBetting = function() {
@@ -230,16 +262,19 @@ TableManager.prototype.preFlopBetting = function() {
 	}
 };
 
-function log(str){
-	var txt = $("#jutt");
-	txt.val( txt.val() + "\n"+str);
+function logToChat(str){
+	var txt = $("#chatArea");
+	txt.val(str + '\n' + txt.val());
 }
 
 $(document).ready(function(){
 	$("#startGame").click(function(){
-		geim = new TableManager();
-		log("Mängu algus.");
-		geim.initGame();
+		tableManager = new TableManager();
+		logToChat("New table created. Ups");
+		tableManager.initGame();
+		// tableManager.buyInPlayers(); // TODO: initGame should only initialize TableManager, players should be bought in here
+		tableManager.startGame();
+		
 	});
 });
 ;
