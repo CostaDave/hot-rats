@@ -154,11 +154,11 @@ TableManager.prototype = {
 			this.collectBlinds();
 			this.dealHoleCards();
 			this.preFlopBetting();
-//			dealFlop();
+			this.dealFlop();
 //			thirdStreetBetting();
-//			dealTurn();
+			this.dealTurn();
 //			fourthStreetBetting();
-//			dealRiver();
+			this.dealRiver();
 //			fifthStreetBetting();
 //			payWinner();
 		}
@@ -264,6 +264,32 @@ TableManager.prototype.preFlopBetting = function() {
 		this.doPlayerAction(actionDict);
 		
 	}
+};
+
+TableManager.prototype.dealFlop = function() {
+	logToChat('Dealing flop');
+	for (var i = 0; i < 3; i++) {
+		nextCardDealt = this.deck.nextCard();
+		this.board.push(nextCardDealt);
+		var cardsOnBoard = $('#communityCards');
+		$('#communityCards').html(cardsOnBoard.html() + nextCardDealt.htmlValue());
+	}
+};
+
+TableManager.prototype.dealTurn = function() {
+	logToChat('Dealing turn');
+	nextCardDealt = this.deck.nextCard();
+	this.board.push(nextCardDealt);
+	var cardsOnBoard = $('#communityCards');
+	$('#communityCards').html(cardsOnBoard.html() + nextCardDealt.htmlValue());
+};
+
+TableManager.prototype.dealRiver = function() {
+	logToChat('Dealing river');
+	nextCardDealt = this.deck.nextCard();
+	this.board.push(nextCardDealt);
+	var cardsOnBoard = $('#communityCards');
+	$('#communityCards').html(cardsOnBoard.html() + nextCardDealt.htmlValue());
 };
 
 function logToChat(str){
