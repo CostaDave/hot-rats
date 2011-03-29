@@ -225,10 +225,13 @@ TableManager.prototype.collectBlinds = function() {
 };
 
 TableManager.prototype.dealHoleCards = function() {
+	logToChat('Dealing hole cards');
 	nextPlayer = this.nextPlayerAfter(this.findButtonPlayer());
 	this.deck.shuffle();
 	for (i = 0; i < this.players.length * 2; i++) { // Go through all players twice, beginning with player after dealer (small blind)
-		nextPlayer.addCard(this.deck.nextCard());
+		cardDealt = this.deck.nextCard();
+		console.log('Dealt ' + cardDealt.cardKey() + ' to ' + nextPlayer.name);
+		nextPlayer.addCard(cardDealt);
 		nextPlayer = this.nextPlayerAfter(nextPlayer);
 	}
 };
