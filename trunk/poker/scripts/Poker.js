@@ -124,6 +124,7 @@ TableManager.prototype = {
 		initGame : function(){
 			for(i=1;i<10;i++){	
 				player = new Player(PlayerNames[i-1],1000,$('#p'+i));
+				log(PlayerNames[i-1] + " liitus lauaga.");
 				player.draw();
 				this.players.push(player);
 			}		
@@ -214,6 +215,7 @@ TableManager.prototype.dealHoleCards = function() {
 
 TableManager.prototype.doPlayerAction = function(actionDict) {
 	if (actionDict['action'] == 'fold') {
+		log("Foldis.");
 		// TODO: fold player, make him inactive in players list (somehow :S)
 	}
 };
@@ -228,10 +230,18 @@ TableManager.prototype.preFlopBetting = function() {
 	}
 };
 
+function log(str){
+	var txt = $("#jutt");
+	txt.val( txt.val() + "\n"+str);
+}
+
 $(document).ready(function(){
 	$("#startGame").click(function(){
 		geim = new TableManager();
+		log("Mängu algus.");
 		geim.initGame();
 	});
 });
+;
+
 
