@@ -296,21 +296,42 @@ function logToChat(str){
 	txt.val(str + '\n' + txt.val());
 }
 
-function disableJoinButton(){
-	$("#startGame").css("background-image", "url(./images/join_g.png)");
-	$("#startGame").click(function(){});			
+function clearTable() {
+	console.log('Cleaning table');
+	// TODO: clear poker table
 }
 
-$(document).ready(function(){
-	$("#startGame").click(function(){
+function enableJoinButton() {
+	$('#startGame').html('<img src="images/join.png">');
+	$('#startGame').click(function(){
+		disableJoinButton();
 		tableManager = new TableManager();
-		logToChat("New table created. Ups");
+		logToChat("New table created");
 		tableManager.initGame();
 		// tableManager.buyInPlayers(); // TODO: initGame should only initialize TableManager, players should be bought in here
 		tableManager.startGame();
-		disableJoinButton();
-		
 	});
+};
+
+function disableJoinButton() {
+	console.log('disabling join button');
+	$('#startGame').html('<img src="images/join_g.png">');
+	$('#startGame').click(function(){});
+};
+
+function enterGame() {
+	$('#startGame').click(enableJoinButton);
+};
+
+function leaveGame() {
+	console.log('leaving game');
+	clearTable();
+	enableJoinButton();
+};
+
+$(document).ready(function(){
+	enableJoinButton();
+	$('#exit').click(leaveGame);
 });
 ;
 
