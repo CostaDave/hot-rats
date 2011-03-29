@@ -173,7 +173,7 @@ TableManager.prototype.positionDealerButton = function() {
 		if (player.isDealer() == true) {
 			player.setIsDealer(false); // Take button from previous player
 			this.nextPlayerAfter(player).setIsDealer(true); // Give it to next
-			dealerSelectionMsg = 'Dealer button given to ' + nextPlayer.name;
+			dealerSelectionMsg = 'Dealer button given to ' + this.nextPlayerAfter(player).name;
 			previousDealerFound = true;
 			break;
 		}
