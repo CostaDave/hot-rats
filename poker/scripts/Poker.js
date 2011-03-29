@@ -106,9 +106,10 @@ Player.prototype = {
 		},
 		addCard : function(card) {
 			//if(this.hand.length == 1) {$('.holeCard1', this.seat).htmlValue(card.htmlValue());
-			if($('#p1 > div.playerCards > div.holeCard1').has("img")){
-				$('#p1 > div.playerCards > div.holeCard2').html(card.htmlValue());
-			}else{$('#p1 > div.playerCards > div.holeCard1').html(card.htmlValue());}
+			if(this.hand.length == 1){
+				$('.holeCard2', this.seat).html(card.htmlValue());
+			} else {
+				$('.holeCard1', this.seat).html(card.htmlValue());}
 			this.hand.push(card);
 		},
 		getActionForTableInfo : function(tableInfo) {
