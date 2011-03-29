@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+h1 {
+	font-weight: bold;
+	color: #06C;
+}
+th {
+	color: #FFF;
+	background-color: #09F;
+}
+td.NumberCell {
+	text-align: center;
+}
+td {border-style:solid;
+	border-color:#000;
+	border-width:thin;
+	border-collapse:collapse;
+}
