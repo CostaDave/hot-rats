@@ -149,15 +149,15 @@ TableManager.prototype = {
 		},
 		startGame : function() {
 			this.deck.shuffle();
-			this.positionDealerButton();
-			this.collectBlinds();
-			this.dealHoleCards();
-			this.preFlopBetting();
-			this.dealFlop();
+//			this.positionDealerButton();
+//			this.collectBlinds();
+//			this.dealHoleCards();
+//			this.preFlopBetting();
+//			this.dealFlop();
 //			thirdStreetBetting();
-			this.dealTurn();
+//			this.dealTurn();
 //			fourthStreetBetting();
-			this.dealRiver();
+//			this.dealRiver();
 //			fifthStreetBetting();
 //			payWinner();
 		}
@@ -230,7 +230,7 @@ TableManager.prototype.dealHoleCards = function() {
 	this.deck.shuffle();
 	for (i = 0; i < this.players.length * 2; i++) { // Go through all players twice, beginning with player after dealer (small blind)
 		cardDealt = this.deck.nextCard();
-		console.log('Dealt ' + cardDealt.cardKey() + ' to ' + nextPlayer.name);
+		// console.log('Dealt ' + cardDealt.cardKey() + ' to ' + nextPlayer.name);
 		nextPlayer.addCard(cardDealt);
 		nextPlayer = this.nextPlayerAfter(nextPlayer);
 	}
@@ -297,20 +297,21 @@ function logToChat(str){
 }
 
 function clearTable() {
-	console.log('Cleaning table');
-	// TODO: clear poker table
+//	console.log('Cleaning table');
+//	console.log('Cleaning table');
+//	$('#communityCards').empty();
+//	$('#bet').empty();
+//	$('#pot').empty();
+//	$('.holeCard1').empty();
+//	$('.holeCard2').empty();
+//	$('.dealer').empty();
+//	
+	window.location.reload(); // Oops...
 }
 
 function enableJoinButton() {
 	$('#startGame').html('<img src="images/join.png">');
-	$('#startGame').click(function(){
-		disableJoinButton();
-		tableManager = new TableManager();
-		logToChat("New table created");
-		tableManager.initGame();
-		// tableManager.buyInPlayers(); // TODO: initGame should only initialize TableManager, players should be bought in here
-		tableManager.startGame();
-	});
+	$('#startGame').click(enterGame);
 };
 
 function disableJoinButton() {
@@ -320,7 +321,14 @@ function disableJoinButton() {
 };
 
 function enterGame() {
-	$('#startGame').click(enableJoinButton);
+	console.log('entering game');
+	console.log('start game called');
+	tableManager = new TableManager();
+	logToChat("New table created");
+	tableManager.initGame();
+	// tableManager.buyInPlayers(); // TODO: initGame should only initialize TableManager, players should be bought in here
+	tableManager.startGame();
+	disableJoinButton();
 };
 
 function leaveGame() {
@@ -335,4 +343,33 @@ $(document).ready(function(){
 });
 ;
 
-
+nextBigThing = function(){
+	if (nextBigThing.step == undefined) {
+		nextBigThing.step = 0;
+	}
+	switch(nextBigThing.step) {
+	case 1:
+		tableManager.positionDealerButton();
+		break;
+	case 2:
+		tableManager.collectBlinds();
+		break;
+	case 3:
+		tableManager.dealHoleCards();
+		break;
+	case 4:
+		tableManager.preFlopBetting();
+		break;
+	case 5:
+		tableManager.dealFlop();
+		break;
+	case 6:
+		tableManager.dealTurn();
+		break;
+	case 7:
+		tableManager.dealRiver();
+		break;
+	}
+	nextBigThing.step += 1;
+	return 'Did ' + nextBigThing.step + ' th thing';
+};
