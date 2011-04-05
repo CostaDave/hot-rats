@@ -95,7 +95,6 @@ Player.prototype = {
 			return this.button;
 		},
 		setIsDealer : function(buttonForMe) {
-			// TODO: draw a dealer button if buttonForMe == true
 			this.button = buttonForMe;
 			if (buttonForMe) {
 				$('.dealer', this.seat).html(DEALER_BUTTON_HTML);
@@ -104,7 +103,6 @@ Player.prototype = {
 			}
 		},
 		addCard : function(card) {
-			//if(this.hand.length == 1) {$('.holeCard1', this.seat).htmlValue(card.htmlValue());
 			if(this.hand.length == 1){
 				$('.holeCard2', this.seat).html(card.htmlValue());
 			} else {
@@ -342,7 +340,7 @@ $(document).ready(function(){
 	$('#exit').click(leaveGame);
 });
 
-nextBigThing = function(){
+function nextBigThing(){
 	if (nextBigThing.step == undefined) {
 		nextBigThing.step = 0;
 	}
@@ -372,3 +370,4 @@ nextBigThing = function(){
 	nextBigThing.step += 1;
 	return 'Did ' + nextBigThing.step + ' th thing';
 };
+xx = nextBigThing;
